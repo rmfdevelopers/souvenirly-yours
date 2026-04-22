@@ -2,17 +2,17 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { 
-  Package, 
-  Truck, 
-  PenTool, 
-  Mail, 
-  Instagram, 
-  MapPin, 
-  ArrowRight, 
-  CheckCheck, 
-  Loader2, 
-  Menu, 
+import {
+  Package,
+  Truck,
+  PenTool,
+  Mail,
+  Instagram,
+  MapPin,
+  ArrowRight,
+  CheckCheck,
+  Loader2,
+  Menu,
   X,
   ImageOff,
   Phone
@@ -52,6 +52,12 @@ const IMAGES = {
     "https://images.unsplash.com/photo-1772217104209-c47231f78c71?q=80&w=1080"
   ]
 };
+
+const TESTIMONIALS = [
+  { name: "Adesua O.", role: "Bride", text: "The wedding favors were the talk of the night. So elegant and perfectly packaged! Every detail felt intentional." },
+  { name: "Chidi K.", role: "Marketing Director", text: "Top-tier corporate gifting. They made our 500-guest AGM feel incredibly personal. Sharp delivery to our Abuja office too." },
+  { name: "Bose T.", role: "Event Planner", text: "Souvenirly Yours is my go-to for quality. They never miss a deadline and the bespoke branding is always flawless." }
+];
 
 // --- HOOKS ---
 
@@ -125,7 +131,7 @@ export default function Page() {
             <div className="w-10 h-10 bg-accent text-primary flex items-center justify-center rounded-lg font-heading font-black text-xl group-hover:scale-105 transition-transform">S</div>
             <span className="font-heading text-lg font-bold tracking-tight text-white hidden sm:block">Souvenirly Yours</span>
           </a>
-          
+
           <div className="hidden md:flex gap-10 items-center">
             {['Gallery', 'Features', 'Products', 'Consultation'].map((link) => (
               <a key={link} href={`#${link.toLowerCase()}`} className="text-white/70 hover:text-accent transition-colors text-sm font-medium uppercase tracking-widest">{link}</a>
@@ -162,17 +168,14 @@ export default function Page() {
       </div>
 
       {/* HERO - HR-C Pattern */}
-      <section id="home" className="min-h-screen grid md:grid-cols-[1fr_1fr] items-stretch bg-primary overflow-hidden">
-        <div className="flex flex-col justify-center px-8 md:px-16 lg:px-24 py-32 md:py-24">
+      <section id="home" className="relative min-h-screen grid md:grid-cols-[1fr_1fr] items-stretch bg-primary overflow-hidden">
+        <div className="relative z-20 flex flex-col justify-center px-8 md:px-16 py-24 md:py-24 bg-primary/40 md:bg-transparent backdrop-blur-[2px] md:backdrop-blur-none min-h-screen md:min-h-0">
           <div className="animate-slideUp">
-            <p className="text-accent font-mono text-xs tracking-[0.4em] uppercase mb-6 opacity-70">
-              {BRAND.region} • Boutique Gifting
-            </p>
             <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[0.95] tracking-tighter">
-              Gifting Just Got <br/><span className="text-accent">Easier</span>
+              Gifting Just Got <br /><span className="text-accent">Easier</span>
             </h1>
             <p className="text-secondary/60 mt-8 text-lg max-w-md leading-relaxed">
-              <span className="text-accent/80 font-bold">{BRAND.bn}</span> | {BRAND.description}
+              {BRAND.description}
             </p>
             <div className="flex gap-4 mt-12 flex-wrap">
               <a href="#contact" className="bg-accent text-primary px-10 py-4 font-bold text-base
@@ -186,8 +189,8 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="relative min-h-[50vh] md:min-h-full overflow-hidden">
-          <div className="absolute inset-0 z-10 bg-gradient-to-r from-primary via-primary/20 to-transparent" />
+        <div className="absolute inset-0 md:relative md:inset-auto z-10 min-h-full overflow-hidden">
+          <div className="absolute inset-0 z-10 bg-gradient-to-b from-primary/80 via-primary/20 to-primary/80 md:bg-gradient-to-r md:from-primary md:via-primary/20 md:to-transparent" />
           <SafeImage src={IMAGES.hero} alt={BRAND.name} fill className="object-cover scale-110 animate-float" priority />
         </div>
       </section>
@@ -203,7 +206,7 @@ export default function Page() {
             {IMAGES.products.map((src, i) => {
               const { ref, isVisible } = useScrollReveal(0.1);
               return (
-                <div key={i} ref={ref as any} 
+                <div key={i} ref={ref as any}
                   className={`break-inside-avoid group relative rounded-3xl overflow-hidden transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
                   style={{ transitionDelay: `${i * 100}ms` }}>
                   <SafeImage src={src} alt={`Gallery ${i + 1}`} width={600} height={400}
@@ -338,64 +341,73 @@ export default function Page() {
             <h2 className="font-heading text-5xl font-black text-white">Kind Words</h2>
             <p className="text-secondary/40 mt-4">From our beloved clients across the nation.</p>
           </div>
-          <div className="columns-1 md:columns-2 gap-8 space-y-8">
-            {[
-              { name: "Adesua O.", role: "Bride", text: "The wedding favors were the talk of the night. So elegant and perfectly packaged! Every detail felt intentional." },
-              { name: "Chidi K.", role: "Marketing Director", text: "Top-tier corporate gifting. They made our 500-guest AGM feel incredibly personal. Sharp delivery to our Abuja office too." },
-              { name: "Bose T.", role: "Event Planner", text: "Souvenirly Yours is my go-to for quality. They never miss a deadline and the bespoke branding is always flawless." }
-            ].map((t, i) => {
-              const { ref, isVisible } = useScrollReveal();
-              return (
-                <div key={i} ref={ref as any} 
-                  className={`break-inside-avoid p-10 rounded-[2.5rem] bg-primary border border-white/5 relative overflow-hidden group transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-12 blur-sm'}`}
-                  style={{ transitionDelay: `${i * 150}ms` }}>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl" />
-                  <p className="text-white/80 text-xl leading-relaxed italic relative z-10 font-medium">
-                    &ldquo;{t.text}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-4 border-t border-white/5 pt-8 mt-10 relative z-10">
-                    <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-heading font-black">
-                      {t.name.charAt(0)}
-                    </div>
-                    <div>
-                      <p className="font-heading font-bold text-white">{t.name}</p>
-                      <p className="text-accent text-xs font-mono tracking-widest uppercase mt-0.5">{t.role}</p>
+          <div className="relative overflow-hidden py-10">
+            <div className="flex animate-slide-left w-fit gap-8 whitespace-nowrap">
+              {[...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => {
+                return (
+                  <div key={i}
+                    className="w-[400px] flex-shrink-0 p-10 rounded-[2.5rem] bg-primary border border-white/5 relative overflow-hidden group transition-all duration-700 whitespace-normal">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl" />
+                    <p className="text-white/80 text-xl leading-relaxed italic relative z-10 font-medium">
+                      &ldquo;{t.text}&rdquo;
+                    </p>
+                    <div className="flex items-center gap-4 border-t border-white/5 pt-8 mt-10 relative z-10">
+                      <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-heading font-black">
+                        {t.name.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-heading font-bold text-white">{t.name}</p>
+                        <p className="text-accent text-xs font-mono tracking-widest uppercase mt-0.5">{t.role}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
 
       {/* CONTACT - Consultation Hub - C2 Pattern */}
-      <section id="contact" className="relative overflow-hidden py-32 bg-primary">
-        <div className="absolute inset-0 bg-accent" />
-        <div className="absolute inset-0 bg-primary [clip-path:polygon(0_0,65%_0,40%_100%,0_100%)] hidden md:block" />
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
-          <div className="animate-fadeIn">
-            <h2 className="font-heading text-6xl lg:text-7xl font-black text-white leading-none mb-8">
-              Gift <br/><span className="text-accent md:text-white">Consultation</span> <br/>Hub
-            </h2>
-            <p className="text-secondary/60 text-xl max-w-md mb-12">
-              Ready to create something unforgettable? Tell us about your event. Sharp delivery, nationwide.
-            </p>
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 text-white/70">
-                <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10"><Instagram size={20} /></div>
-                <span className="font-bold tracking-widest uppercase text-sm">@souvenirly_yours</span>
-              </div>
-              <div className="flex items-center gap-4 text-white/70">
-                <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10"><MapPin size={20} /></div>
-                <span className="font-bold tracking-widest uppercase text-sm">Lagos, Nigeria</span>
+      <section id="consultation" className="relative py-32 bg-primary overflow-hidden">
+        {/* Background Accents */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/4" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+            <div className="animate-slideUp">
+              <h2 className="font-heading text-5xl md:text-7xl font-black text-white leading-[0.95] tracking-tighter mb-8">
+                Let's Craft Your <br /><span className="text-accent">Legacy</span> Gift
+              </h2>
+              <p className="text-secondary/60 text-lg md:text-xl leading-relaxed mb-12 max-w-lg">
+                From corporate gala souvenirs to intimate wedding favors, we curate high-end collections that resonate. Fill out the brief and our specialists will handle the rest.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-8">
+                <div className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-accent/30 transition-colors group">
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Instagram size={24} className="text-accent" />
+                  </div>
+                  <h4 className="text-white font-bold mb-2">Social Hub</h4>
+                  <p className="text-secondary/40 text-sm tracking-widest uppercase font-black">@souvenirly_yours</p>
+                </div>
+                <div className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-accent/30 transition-colors group">
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Mail size={24} className="text-accent" />
+                  </div>
+                  <h4 className="text-white font-bold mb-2">Direct Inquiry</h4>
+                  <p className="text-secondary/40 text-sm tracking-widest uppercase font-black truncate">hello@souvenirly.com</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="w-full max-w-lg ml-auto">
-            <ContactForm />
+            <div className="relative">
+              <div className="absolute inset-0 bg-accent/20 blur-[100px] rounded-full pointer-events-none opacity-20" />
+              <div className="relative z-10">
+                <ContactForm />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -413,7 +425,7 @@ export default function Page() {
                 Curating memories through bespoke bulk gifts for the most important milestones of your life.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-12">
               <div>
                 <h4 className="text-accent font-mono text-xs tracking-[0.3em] uppercase mb-8 opacity-60">Navigate</h4>
@@ -437,11 +449,11 @@ export default function Page() {
               <p className="text-secondary/40 text-sm leading-relaxed mb-6">Join our mailing list for gift ideas and seasonal collections.</p>
               <div className="flex gap-2">
                 <input type="email" placeholder="Email Address" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm flex-1 outline-none focus:border-accent transition-colors" />
-                <button className="bg-accent p-3 rounded-xl text-primary hover:scale-105 transition-transform"><ArrowRight size={20}/></button>
+                <button className="bg-accent p-3 rounded-xl text-primary hover:scale-105 transition-transform"><ArrowRight size={20} /></button>
               </div>
             </div>
           </div>
-          
+
           <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 gap-6 text-center">
             <p className="text-secondary/30 text-xs font-mono uppercase tracking-[0.2em]">
               © {new Date().getFullYear()} SOUVENIRLY YOURS. ALL RIGHTS RESERVED.
@@ -483,51 +495,61 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-primary p-10 rounded-[2.5rem] border border-white/10 shadow-2xl relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-[80px] rounded-full pointer-events-none" />
+    <form onSubmit={handleSubmit} className="bg-white/[0.03] backdrop-blur-3xl p-8 md:p-12 rounded-[2.5rem] border border-white/10 shadow-2xl relative">
       <div className="relative z-10">
-        <h3 className="font-heading text-2xl font-bold text-white mb-8">Start Your Curation</h3>
-        <div className="space-y-4">
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={form.name}
-            onChange={e => setForm(prev => ({ ...prev, name: e.target.value }))}
-            required
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/30 text-sm outline-none transition-all duration-300 focus:bg-white/10 focus:border-accent"
-          />
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={form.email}
-            onChange={e => setForm(prev => ({ ...prev, email: e.target.value }))}
-            required
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/30 text-sm outline-none transition-all duration-300 focus:bg-white/10 focus:border-accent"
-          />
-          <input
-            type="number"
-            placeholder="Estimated Pieces (Min 30)"
-            value={form.count}
-            onChange={e => setForm(prev => ({ ...prev, count: e.target.value }))}
-            required
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/30 text-sm outline-none transition-all duration-300 focus:bg-white/10 focus:border-accent"
-          />
+        <div className="mb-10">
+          <h3 className="font-heading text-3xl font-black text-white mb-2">Briefing Desk</h3>
+          <p className="text-secondary/40 text-sm">We'll get back to you within 24 hours.</p>
+        </div>
+
+        <div className="space-y-5">
+          <div className="relative group">
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={form.name}
+              onChange={e => setForm(prev => ({ ...prev, name: e.target.value }))}
+              required
+              className="w-full bg-white/5 border border-white/5 rounded-2xl px-6 py-5 text-white placeholder-white/20 text-sm outline-none transition-all duration-300 group-hover:bg-white/10 focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/5"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-5">
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={form.email}
+              onChange={e => setForm(prev => ({ ...prev, email: e.target.value }))}
+              required
+              className="w-full bg-white/5 border border-white/5 rounded-2xl px-6 py-5 text-white placeholder-white/20 text-sm outline-none transition-all duration-300 group-hover:bg-white/10 focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/5"
+            />
+            <input
+              type="number"
+              placeholder="Pieces (Min 30)"
+              value={form.count}
+              onChange={e => setForm(prev => ({ ...prev, count: e.target.value }))}
+              required
+              className="w-full bg-white/5 border border-white/5 rounded-2xl px-6 py-5 text-white placeholder-white/20 text-sm outline-none transition-all duration-300 group-hover:bg-white/10 focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/5"
+            />
+          </div>
+
           <textarea
-            rows={4}
+            rows={5}
             placeholder="Tell us about your event (Date, Theme, Specific items)..."
             value={form.message}
             onChange={e => setForm(prev => ({ ...prev, message: e.target.value }))}
             required
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/30 text-sm outline-none resize-none transition-all duration-300 focus:bg-white/10 focus:border-accent"
+            className="w-full bg-white/5 border border-white/5 rounded-2xl px-6 py-5 text-white placeholder-white/20 text-sm outline-none resize-none transition-all duration-300 group-hover:bg-white/10 focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/5"
           />
         </div>
+
         <button type="submit" disabled={loading}
-          className="w-full mt-10 bg-accent text-primary py-5 rounded-2xl font-black text-lg hover:brightness-110 shadow-xl shadow-accent/20 transition-all duration-300 disabled:opacity-60 flex justify-center items-center gap-3 group">
+          className="w-full mt-10 bg-accent text-primary py-6 rounded-2xl font-black text-lg hover:scale-[1.02] active:scale-[0.98] shadow-2xl shadow-accent/20 transition-all duration-300 disabled:opacity-60 flex justify-center items-center gap-3">
           {loading ? (
             <Loader2 className="animate-spin" size={24} />
           ) : (
             <>
-              Submit Inquiry <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              Initialize Project <ArrowRight size={22} />
             </>
           )}
         </button>
